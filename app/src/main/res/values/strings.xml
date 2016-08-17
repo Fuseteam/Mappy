@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">mappy</string>
+    <string name="title_activity_main">Mappy</string>
+    <string name="title_activity_maps">FilterMappy</string>
+    <string name="Search">Search</string>
+    <string name="Example">This data is retrieved from the database and only 4 of the results are displayed</string>
+    <string name="empty">Please Select The Area To Search In</string>
+    <string name="mappins">mappins</string>
+</resources>

@@ -1,0 +1,35 @@
+<RadioGroup
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Maps_Activity"
+    android:id="@+id/Home"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/empty"
+        android:visibility="gone"/>
+    <LinearLayout
+        style="@style/Spinner"
+        android:layout_width="fill_parent"
+        android:orientation="horizontal"
+        android:layout_gravity="end">
+        <Spinner
+            android:id="@+id/District_Selector"
+            style="@style/Spinner"
+            android:layout_gravity="center"/>
+        <Button
+            android:id="@+id/search_button"
+            android:text="@string/Search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+    </LinearLayout>
+    <ListView android:id="@android:id/list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</RadioGroup>
