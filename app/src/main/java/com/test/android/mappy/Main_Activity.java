@@ -37,16 +37,21 @@ public class Main_Activity extends ListActivity implements AdapterView.OnItemSel
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_homescreen);
+        //find the spinner
         DistrictList = (Spinner) findViewById(R.id.District_Selector);
+        //initiate listener for when an option is selected
         DistrictList.setOnItemSelectedListener(this);
+        //create database object to read
         OfflineData Places = new OfflineData(this);
         // read the database
         Place = Places.getReadableDatabase();
         PopulateSelectList();
         SearchButton = (Button) findViewById(R.id.search_button);
+        //if search button is clicked
         SearchButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
+                        //intent and start the map_activity
                         Intent start = new Intent(Main_Activity.this, Maps_Activity.class);
                         Main_Activity.this.startActivity(start);
                     }
@@ -60,8 +65,10 @@ public class Main_Activity extends ListActivity implements AdapterView.OnItemSel
         findViewById(R.id.empty).setVisibility(View.GONE);
         // An item was selected. You can retrieve the selected item using
         SelectedArea = parent.getSelectedItem().toString();
+        //Checks what is selected from the spinner
         if (!SelectedArea.equals("Select Search Area")) {
-            if (!SelectedArea.equals("Around My Location"))
+            //checks if the user wants to check in his vicinity
+            if (!SelectedArea.equals("Near My Location"))
                 DistrictSelect = mColumns[5] + " = '" + SelectedArea + "'";
             CategorySelect = null;
             CheckList.clear();

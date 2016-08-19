@@ -107,29 +107,26 @@ public class Maps_Activity extends FragmentActivity implements OnMapReadyCallbac
         // Add a marker in Paramaribo, Suriname, and move the camera.
         mMap = map;
         mMap.setOnMarkerClickListener(this);
-        LatLng paramaribo = new LatLng(5.8520355, -55.2038278);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(paramaribo));
-        //get the coordinates of certain addresses and add an marker at these addresses
         if (!SelectedArea.equals("Near My Location"))
             getCoordinatesAndPopulateMap();
-        else
-            Location=new LocationList(this);
+        else {
+            LatLng paramaribo = new LatLng(5.8520355, -55.2038278);
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(paramaribo));
+        }
+        //get the coordinates of certain addresses and add an marker at these addresses
+
     }
 
     private void getCoordinatesAndPopulateMap() {//
         String CategorySelect = Main_Activity.CategorySelect;
         Selection = null;
         Location = new LocationList(this);
-        if (CategorySelect != null && DistrictSelect != null)
+        if (CategorySelect != null)
             Selection = CategorySelect + " AND " + DistrictSelect;
-        else if (CategorySelect != null)
-            Selection = CategorySelect;
-        else if (DistrictSelect != null)
+        else
             Selection = DistrictSelect;
         Location.Populate(mMap, Selection);
-        if (DistrictSelect != null) {
-            Location.getCenterLocation(mMap, Selection);
-        }
+        Location.getCenterLocation(mMap, Selection);
     }
 
     @Override
@@ -205,11 +202,16 @@ public class Maps_Activity extends FragmentActivity implements OnMapReadyCallbac
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        if(pCurrent!=null) {
-            pCurrent.remove();
-            Location.DrawRoute(mCurrentLocation, marker.getPosition());
+        if(mCurrentLocation!=null){
+            if(pCurrent!=null) {
+                pCurrent.remove();
+                Location.DrawRoute(mCurrentLocation, marker.getPosition());
+            }
+            else
+                Location.DrawRoute(mCurrentLocation, marker.getPosition());
         }
-        Toast.makeText(this,"Location not found (yet)",Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(this,"Location not found (yet)",Toast.LENGTH_LONG).show();
         return false;
     }
 }
